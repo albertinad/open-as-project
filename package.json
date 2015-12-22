@@ -1,0 +1,30 @@
+{
+    "name": "albertinad.open-as-project",
+    "title": "Open as Project",
+    "version": "0.0.1",
+    "homepage": "https://github.com/albertinad/open-as-project",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/albertinad/open-as-project.git"
+    },
+    "bugs": {
+        "url": "https://github.com/albertinad/open-as-project/issues"
+    },
+    "engines": {
+        "brackets": ">=1.0.0"
+    },
+    "devDependencies": {
+        "grunt": "0.4.5",
+        "grunt-cli": "0.1.13",
+        "grunt-jscs": "1.6.0",
+        "grunt-zip": "0.16.2",
+        "load-grunt-tasks": "1.0.0"
+    },
+    "i18n": ["en", "es"],
+    "keywords": [
+        "brackets-extension",
+        "brackets",
+        "project",
+        "open project"
+    ]
+}
