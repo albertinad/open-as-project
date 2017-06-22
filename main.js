@@ -54,33 +54,43 @@ define(function (require, exports, module) {
     /**
      * @private
      */
-    function _openSelectedDir() {
+    function _cmdOpen() {
+        _isCmdAction = true;
+
         var item = ProjectManager.getSelectedItem(),
+            project = ProjectManager.getProjectRoot(),
             path;
 
-        // get the cwd according to selection
-        if (item.isDirectory) {
-            path = item.fullPath;
-        } else {
-            path = item.parentPath;
-        }
+        if (item) {
+            if (item.isDirectory) {
+                path = item.fullPath;
+            } else if (item.parentPath !== project.fullPath) {
+                path = item.parentPath;
+            }
 
-        ProjectManager.openProject(path);
+            // add current project path to stack and update back command if needed
+            _openNewProjectIfNeeded(project, path);
+        }
+    }
+
+    /**
+    *  @private
+    */
+    function _openNewProjectIfNeeded(currentProject, newPath) {
+        if (currentProject && newPath) {
+            _addProjectToStack(currentProject);
+            ProjectManager.openProject(newPath);
+        }
     }
 
     /**
      * @private
      */
-    function _cmdOpen() {
-        _isCmdAction = true;
-        // add current project path to stack and update back command
-        var project = ProjectManager.getProjectRoot();
+    function _addProjectToStack(project) {
         if (project) {
             _pathStack.push(project.fullPath);
             _toggleBackCmdIfNeeded();
         }
-
-        _openSelectedDir();
     }
 
     /**
